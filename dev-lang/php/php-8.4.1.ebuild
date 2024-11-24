@@ -18,7 +18,7 @@ LICENSE="PHP-3.01
 	gd? ( gd )
 	unicode? ( BSD-2 LGPL-2.1 )"
 
-SLOT="0/$(ver_cut 1-2)"
+SLOT="$(ver_cut 1-2)"
 KEYWORDS="*"
 
 S="${WORKDIR}/php-php-src-0454901"
