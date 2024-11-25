@@ -8,7 +8,7 @@ inherit flag-o-matic autotools
 
 DESCRIPTION="The PHP language runtime engine"
 HOMEPAGE="https://www.php.net/"
-SRC_URI="https://github.com/php/php-src/tarball/0454901ed1518cfb42bc77ac91728591b58c3e6e -> php-src-8.4.1-0454901.tar.gz"
+SRC_URI="https://github.com/php/php-src/tarball/38123aca18c3c1bd1f109ec77af2f175d7afcf35 -> php-src-8.1.31-38123ac.tar.gz"
 
 LICENSE="PHP-3.01
 	BSD
@@ -21,7 +21,7 @@ LICENSE="PHP-3.01
 SLOT="$(ver_cut 1-2)"
 KEYWORDS="*"
 
-S="${WORKDIR}/php-php-src-0454901"
+S="${WORKDIR}/php-php-src-38123ac"
 
 # We can build the following SAPIs in the given order
 SAPIS="embed cli cgi fpm apache2 phpdbg"
