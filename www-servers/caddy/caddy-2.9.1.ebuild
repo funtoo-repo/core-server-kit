@@ -96,8 +96,8 @@ EGO_SUM=(
 	"github.com/beorn7/perks v1.0.1/go.mod"
 	"github.com/bradfitz/go-smtpd v0.0.0-20170404230938-deb6d6237625/go.mod"
 	"github.com/buger/jsonparser v0.0.0-20181115193947-bf1c66bbce23/go.mod"
-	"github.com/caddyserver/certmagic v0.21.5"
-	"github.com/caddyserver/certmagic v0.21.5/go.mod"
+	"github.com/caddyserver/certmagic v0.21.6"
+	"github.com/caddyserver/certmagic v0.21.6/go.mod"
 	"github.com/caddyserver/zerossl v0.1.3"
 	"github.com/caddyserver/zerossl v0.1.3/go.mod"
 	"github.com/cenkalti/backoff/v4 v4.3.0"
@@ -790,8 +790,8 @@ go-module_set_globals
 
 DESCRIPTION="Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS"
 HOMEPAGE="https://caddyserver.com/ https://github.com/caddyserver/caddy"
-SRC_URI="https://github.com/caddyserver/caddy/tarball/5ca563b3da2b5bf57e02a6adc02954ed5c1a63e2 -> caddy-2.9.0-5ca563b.tar.gz
-https://direct-github.funmore.org/75/9a/67/759a672de31118f8f025ac19d09152993dc20cf18009c40f3fb793a6fe8410f764acbe40943471e097d11e8e51709372722850153c567210c3dc56a02fe0b321 -> caddy-2.9.0-funtoo-go-bundle-3244822a1d2600889d10b9e4612c664108fd10a5c28e750d28ae8d5f688202a21a266773aa0987ae68da5494db4dcd19679d4d9f1450de8d02cf7322d5e56b8d.tar.gz"
+SRC_URI="https://github.com/caddyserver/caddy/tarball/e2e2a52b0b536e4c79ae126fd096de16f857d283 -> caddy-2.9.1-e2e2a52.tar.gz
+https://direct-github.funmore.org/cf/c7/66/cfc7669f3a00e3448f283905b2fccb162a282b1a6d36f9871c671e358e55752075c2760920e46cbc8d53b464d37617a65f0f64bc0f1b60282327af2247588754 -> caddy-2.9.1-funtoo-go-bundle-08fc9820a9876a378a60b0f835a2906b41cc3c01ebf3500f59763edf3aa460f8520beb7b1ca11fee9ba27a39b88e39ba20ed8bcb7a82ff58e4210f90920b77cd.tar.gz"
 
 LICENSE="Apache-2.0 BSD ECL-2.0 MIT"
 SLOT="0"
@@ -813,7 +813,7 @@ post_src_unpack() {
 # Upstream reference to set custom compile time Caddy versions:
 # https://github.com/caddyserver/caddy/pull/5072/files
 src_compile() {
-	go build -ldflags '-X github.com/caddyserver/caddy/v2.CustomVersion=v2.9.0-5ca563b-funtoo' \
+	go build -ldflags '-X github.com/caddyserver/caddy/v2.CustomVersion=v2.9.1-e2e2a52-funtoo' \
 	-mod=mod ./cmd/caddy || die "compile failed"
 }
 
