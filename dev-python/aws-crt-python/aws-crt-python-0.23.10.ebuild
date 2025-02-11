@@ -8,12 +8,12 @@ inherit distutils-r1
 DESCRIPTION="Python bindings for the AWS Common Runtime"
 HOMEPAGE="https://github.com/awslabs/aws-crt-python"
 SRC_URI="
-	https://github.com/awslabs/aws-crt-python/tarball/1848b2eebe3f0d7b8335e006a13af219cc722199 -> aws-crt-python-0.23.9-1848b2e.tar.gz
+	https://github.com/awslabs/aws-crt-python/tarball/3fb77f66f281e1e0356d1b0ff070dd38580e0c42 -> aws-crt-python-0.23.10-3fb77f6.tar.gz
 	https://github.com/awslabs/aws-c-auth/tarball/b513db4bf82429a1134fecbd6d12e5fda45255a6 -> aws-c-auth-0.8.4-b513db4.tar.gz
 	https://github.com/awslabs/aws-c-cal/tarball/7299c6ab9244595b140d604475cdd6c6921be8ae -> aws-c-cal-0.8.3-7299c6a.tar.gz
 	https://github.com/awslabs/aws-c-common/tarball/0e7637fa852a472bd4c37fc07a325a09c942a5fc -> aws-c-common-0.11.0-0e7637f.tar.gz
 	https://github.com/awslabs/aws-c-compression/tarball/f951ab2b819fc6993b6e5e6cfef64b1a1554bfc8 -> aws-c-compression-0.3.1-f951ab2.tar.gz
-	https://github.com/awslabs/aws-c-event-stream/tarball/9422ef78aac566414d1bebb1a5431a4c53a7547c -> aws-c-event-stream-0.5.1-9422ef7.tar.gz
+	https://github.com/awslabs/aws-c-event-stream/tarball/4bd476bd0c629e8fab4ec0ace92830efc6a79e6c -> aws-c-event-stream-0.5.2-4bd476b.tar.gz
 	https://github.com/awslabs/aws-c-http/tarball/590c7b597f87e5edc080b8b77418690c30319832 -> aws-c-http-0.9.3-590c7b5.tar.gz
 	https://github.com/awslabs/aws-c-io/tarball/3041dabfc13fe9bc9a0467e15aa1d5a09c7fc06f -> aws-c-io-0.15.4-3041dab.tar.gz
 	https://github.com/awslabs/aws-c-mqtt/tarball/83247bde8268905018327891fcf0147f3e438a80 -> aws-c-mqtt-0.12.1-83247bd.tar.gz
@@ -21,7 +21,7 @@ SRC_URI="
 	https://github.com/awslabs/aws-c-sdkutils/tarball/ba6a28fab7ed5d7f1b3b1d12eb672088be093824 -> aws-c-sdkutils-0.2.3-ba6a28f.tar.gz
 	https://github.com/awslabs/aws-checksums/tarball/fb8bd0b8cff00c8c24a35d601fce1b4c611df6da -> aws-checksums-0.2.3-fb8bd0b.tar.gz
 	https://github.com/awslabs/aws-lc/tarball/e7bd0732f4287f1ff974b6c78ee0e8873a0b586d -> aws-lc-1.45.0-e7bd073.tar.gz
-	https://github.com/aws/s2n-tls/tarball/6cc9f53d7ab5f0427ae5f838891fff57844a9e3f -> s2n-tls-1.5.11-6cc9f53.tar.gz
+	https://github.com/aws/s2n-tls/tarball/806830de6a3b98d0bdead01f8408ecb5a6f58723 -> s2n-tls-1.5.12-806830d.tar.gz
 "
 
 LICENSE="Apache-2.0"
