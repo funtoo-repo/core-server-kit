@@ -9,9 +9,9 @@ DESCRIPTION="Python bindings for the AWS Common Runtime"
 HOMEPAGE="https://github.com/awslabs/aws-crt-python"
 SRC_URI="
 	https://github.com/awslabs/aws-crt-python/tarball/3fb77f66f281e1e0356d1b0ff070dd38580e0c42 -> aws-crt-python-0.23.10-3fb77f6.tar.gz
-	https://github.com/awslabs/aws-c-auth/tarball/b513db4bf82429a1134fecbd6d12e5fda45255a6 -> aws-c-auth-0.8.4-b513db4.tar.gz
+	https://github.com/awslabs/aws-c-auth/tarball/2d85beff96bee7ee4734c21c7fc6b15e9d07b85e -> aws-c-auth-0.8.5-2d85bef.tar.gz
 	https://github.com/awslabs/aws-c-cal/tarball/7299c6ab9244595b140d604475cdd6c6921be8ae -> aws-c-cal-0.8.3-7299c6a.tar.gz
-	https://github.com/awslabs/aws-c-common/tarball/0e7637fa852a472bd4c37fc07a325a09c942a5fc -> aws-c-common-0.11.0-0e7637f.tar.gz
+	https://github.com/awslabs/aws-c-common/tarball/6401c830ffcd82ee9c9e26255f2fadf7092c7321 -> aws-c-common-0.11.1-6401c83.tar.gz
 	https://github.com/awslabs/aws-c-compression/tarball/f951ab2b819fc6993b6e5e6cfef64b1a1554bfc8 -> aws-c-compression-0.3.1-f951ab2.tar.gz
 	https://github.com/awslabs/aws-c-event-stream/tarball/4bd476bd0c629e8fab4ec0ace92830efc6a79e6c -> aws-c-event-stream-0.5.2-4bd476b.tar.gz
 	https://github.com/awslabs/aws-c-http/tarball/590c7b597f87e5edc080b8b77418690c30319832 -> aws-c-http-0.9.3-590c7b5.tar.gz
