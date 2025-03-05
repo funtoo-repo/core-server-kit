@@ -1,104 +1,101 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3+ )
-PYTHON_REQ_USE='threads(+),xml(+)'
+PYTHON_REQ_USE="threads(+),xml(+)"
 inherit python-single-r1 waf-utils linux-info pam
+
+DESCRIPTION="Samba Suite"
+HOMEPAGE="https://samba.org/"
+SRC_URI="https://download.samba.org/pub/samba/stable/samba-4.21.4.tar.gz -> samba-4.21.4.tar.gz
+"
+LICENSE="LGPL-3"
 
 MY_PV="${PV/_rc/rc}"
 MY_P="${PN}-${MY_PV}"
 
-SRC_PATH="stable"
-[[ ${PV} = *_rc* ]] && SRC_PATH="rc"
-
-SRC_URI="mirror://samba/${SRC_PATH}/${MY_P}.tar.gz"
-[[ ${PV} = *_rc* ]] || \
 KEYWORDS="*"
+SLOT="0/2.10.0"
 
-DESCRIPTION="Samba Suite Version 4"
-HOMEPAGE="https://www.samba.org/"
-LICENSE="GPL-3"
+IUSE="acl addc addns ads ceph client cluster cups debug dmapi fam glusterfs
+gpg iprint json ldap ntvfs pam profiling-data python quota +regedit
+snapper spotlight syslog system-heimdal +system-mitkrb5 test winbind
+zeroconf"
 
-SLOT="0"
-
-IUSE="acl addc addns ads ceph client cluster cups debug dmapi fam gpg iprint
-json ldap pam profiling-data python quota selinux snapper syslog
-system-heimdal +system-mitkrb5 test winbind zeroconf"
-
-CDEPEND="
+COMMON_DEPEND="
 	>=app-arch/libarchive-3.1.2
 	dev-lang/perl:=
+	spotlight? ( dev-libs/icu:= )
 	dev-libs/libbsd
 	dev-libs/libtasn1
 	dev-libs/popt
-	>=net-libs/gnutls-3.2.0
+	dev-perl/Parse-Yapp
+	>=net-libs/gnutls-3.4.7
 	net-libs/libnsl
 	sys-libs/e2fsprogs-libs
-	$(python_gen_cond_dep '
-		dev-python/subunit[${PYTHON_USEDEP}]
-		>=sys-libs/ldb-2.0.12[ldap(+)?,python?,${PYTHON_USEDEP}]
-		<sys-libs/ldb-2.2.0[ldap(+)?,python?,${PYTHON_USEDEP}]
-		>=sys-libs/talloc-2.2.0[python?,${PYTHON_USEDEP}]
-		>=sys-libs/tdb-1.4.2[python?,${PYTHON_USEDEP}]
-		>=sys-libs/tevent-0.10.0[python?,${PYTHON_USEDEP}]
-		>=sys-libs/talloc-2.2.0[python?,${PYTHON_USEDEP}]
-		>=sys-libs/tdb-1.4.2[python?,${PYTHON_USEDEP}]
-		>=sys-libs/tevent-0.10.0[python?,${PYTHON_USEDEP}]
-	')
+	!sys-libs/ldb
 	sys-libs/libcap
+	sys-libs/liburing
 	sys-libs/ncurses:0=
 	sys-libs/readline:0=
+	sys-libs/talloc
+	sys-libs/tdb
+	sys-libs/tevent
 	sys-libs/zlib
 	virtual/libiconv
-	pam? ( sys-libs/pam )
 	acl? ( virtual/acl )
-	addns? (
-		net-dns/bind-tools[gssapi]
-		$(python_gen_cond_dep '
-		dev-python/dnspython:=[${PYTHON_USEDEP}]
-		')
-	)
+	$(python_gen_cond_dep "
+		dev-python/subunit[\${PYTHON_USEDEP}]
+		addns? (
+			dev-python/dnspython:=[\${PYTHON_USEDEP}]
+			net-dns/bind-tools[gssapi]
+		)
+	")
 	ceph? ( sys-cluster/ceph )
-	cluster? (
-		net-libs/rpcsvc-proto
-		!dev-db/ctdb
-	)
+	cluster? ( net-libs/rpcsvc-proto )
 	cups? ( net-print/cups )
 	debug? ( dev-util/lttng-ust )
 	dmapi? ( sys-apps/dmapi )
-	fam? ( app-admin/fam )
+	fam? ( virtual/fam )
 	gpg? ( app-crypt/gpgme )
 	json? ( dev-libs/jansson )
 	ldap? ( net-nds/openldap )
+	pam? ( sys-libs/pam )
+	python? (
+		sys-libs/talloc[python,${PYTHON_USEDEP}]
+		sys-libs/tdb[python,${PYTHON_USEDEP}]
+		sys-libs/tevent[python,${PYTHON_USEDEP}]
+	)
 	snapper? ( sys-apps/dbus )
 	system-heimdal? ( >=app-crypt/heimdal-1.5[-ssl] )
 	system-mitkrb5? ( >=app-crypt/mit-krb5-1.15.1 )
 	zeroconf? ( net-dns/avahi[dbus] )
 "
-DEPEND="${CDEPEND}
-	${PYTHON_DEPS}
-	app-text/docbook-xsl-stylesheets
-	dev-libs/libxslt
-	>=dev-util/cmocka-1.1.1
+DEPEND="${COMMON_DEPEND}
+	>=dev-util/cmocka-1.1.3
 	net-libs/libtirpc
-	virtual/pkgconfig
 	|| (
 		net-libs/rpcsvc-proto
 		<sys-libs/glibc-2.26[rpc(+)]
 	)
+	spotlight? ( dev-libs/glib )
 	test? (
-		>=sys-libs/nss_wrapper-1.1.6
-		>=net-dns/resolv_wrapper-1.1.4
-		>=net-libs/socket_wrapper-1.2.3
-		>=sys-libs/uid_wrapper-1.2.1
-		>=sys-libs/pam_wrapper-1.0.7
+		!system-mitkrb5? (
+			>=net-dns/resolv_wrapper-1.1.4
+			>=net-libs/socket_wrapper-1.1.9
+			>=sys-libs/nss_wrapper-1.1.3
+			>=sys-libs/uid_wrapper-1.2.1
+		)
 	)"
-RDEPEND="${CDEPEND}
-	python? ( ${PYTHON_DEPS} )
+RDEPEND="${COMMON_DEPEND}
 	client? ( net-fs/cifs-utils[ads?] )
-	selinux? ( sec-policy/selinux-samba )
-	!dev-perl/Parse-Yapp
+	python? ( ${PYTHON_DEPS} )
+"
+BDEPEND="${PYTHON_DEPS}
+	app-text/docbook-xsl-stylesheets
+	dev-libs/libxslt
+	virtual/pkgconfig
 "
 
 REQUIRED_USE="
@@ -107,7 +104,10 @@ REQUIRED_USE="
 	ads? ( acl ldap winbind )
 	cluster? ( ads )
 	gpg? ( addc )
+	ntvfs? ( addc )
+	spotlight? ( json )
 	test? ( python )
+	!ads? ( !addc )
 	?? ( system-heimdal system-mitkrb5 )
 	${PYTHON_REQUIRED_USE}
 "
@@ -122,13 +122,7 @@ S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-4.4.0-pam.patch"
-	"${FILESDIR}/${PN}-4.9.2-timespec.patch"
-	"${FILESDIR}/${PN}-4.13-winexe_option.patch"
-	"${FILESDIR}/${PN}-4.13-vfs_snapper_configure_option.patch"
-	"${FILESDIR}/samba-4.11-glibc-2.32-nss-compat.patch"
 )
-
-CONFDIR="${FILESDIR}/4.11"
 
 WAF_BINARY="${S}/buildtools/bin/waf"
 
@@ -139,10 +133,12 @@ pkg_setup() {
 	export DISTCC_DISABLE=1
 
 	python-single-r1_pkg_setup
+
+	SHAREDMODS="$(usex snapper '' '!')vfs_snapper"
 	if use cluster ; then
-		SHAREDMODS="idmap_rid,idmap_tdb2,idmap_ad"
+		SHAREDMODS+=",idmap_rid,idmap_tdb2,idmap_ad"
 	elif use ads ; then
-		SHAREDMODS="idmap_ad"
+		SHAREDMODS+=",idmap_ad"
 	fi
 }
 
@@ -160,14 +156,14 @@ src_prepare() {
 	## ugly hackaround for bug #592502
 	#cp /usr/include/tevent_internal.h "${S}"/lib/tevent/ || die
 
-	# get rid of annoying xattr.h warning:
-	find -iname *.[ch] -exec sed -i -e 's:<attr/xattr\.h>:\<sys/xattr.h>:g' {} \; || die
 	sed -e 's:<gpgme\.h>:<gpgme/gpgme.h>:' \
 		-i source4/dsdb/samdb/ldb_modules/password_hash.c \
-	|| die
+		|| die
 }
 
 src_configure() {
+    export PYTHONHASHSEED=1
+
 	# when specifying libs for samba build you must append NONE to the end to
 	# stop it automatically including things
 	local bundled_libs="NONE"
@@ -190,20 +186,21 @@ src_configure() {
 		--without-winexe
 		$(use_with acl acl-support)
 		$(usex addc '' '--without-ad-dc')
-		$(use_with addns dnsupdate)
-		$(use_with ads)
+		--with-ads
 		$(use_enable ceph cephfs)
 		$(use_with cluster cluster-support)
 		$(use_enable cups)
 		$(use_with dmapi)
 		$(use_with fam)
+		$(use_enable glusterfs)
 		$(use_with gpg gpgme)
-		$(use_with json )
+		$(use_with json)
 		$(use_enable iprint)
 		$(use_with pam)
 		$(usex pam "--with-pammodulesdir=${EPREFIX}/$(get_libdir)/security" '')
 		$(use_with quota quotas)
-		$(use_enable snapper)
+		$(use_with regedit)
+		$(use_enable spotlight)
 		$(use_with syslog)
 		$(use_with winbind)
 		$(usex python '' '--disable-python')
@@ -214,6 +211,8 @@ src_configure() {
 		$(use_with ldap)
 		$(use_with profiling-data)
 		--with-shared-modules=${SHAREDMODS}
+		--private-libraries='!ldb'
+		# bug #683148
 		--jobs 1
 	)
 
@@ -226,7 +225,7 @@ src_compile() {
 }
 
 src_install() {
-	waf-utils_src_install
+    waf-utils_src_install
 
 	# Make all .so files executable
 	find "${ED}" -type f -name "*.so" -exec chmod +x {} + || die
@@ -253,15 +252,14 @@ src_install() {
 		-e '/path =/s@/usr/local/samba/lib/@/var/lib/samba/@' \
 		-e '/path =/s@/usr/local/samba/@/var/lib/samba/@' \
 		-e '/path =/s@/usr/spool/samba@/var/spool/samba@' \
-		-i "${ED%/}"/etc/samba/smb.conf.default || die
+		-i "${ED}"/etc/samba/smb.conf.default || die
 
 	# Install init script and conf.d file
-	newinitd "${CONFDIR}/samba4.initd-r1" samba
-	newconfd "${CONFDIR}/samba4.confd" samba
-
+	newinitd "${FILESDIR}/samba4.initd-r1" samba
+	newconfd "${FILESDIR}/samba4.confd" samba
 
 	if use pam && use winbind ; then
-		newpamd "${CONFDIR}/system-auth-winbind.pam" system-auth-winbind
+		newpamd "${FILESDIR}/system-auth-winbind.pam" system-auth-winbind
 		# bugs #376853 and #590374
 		insinto /etc/security
 		doins examples/pam_winbind/pam_winbind.conf
@@ -270,13 +268,8 @@ src_install() {
 	keepdir /var/cache/samba
 	keepdir /var/lib/ctdb
 	keepdir /var/lib/samba/{bind-dns,private}
+	keepdir /var/lock/samba
 	keepdir /var/log/samba
-}
-
-src_install_all() {
-	# Attempt to fix bug #673168
-	find "${ED}" -type d -name "Yapp" -print0 \
-		| xargs -0 --no-run-if-empty rm -r || die
 }
 
 src_test() {
@@ -284,10 +277,10 @@ src_test() {
 }
 
 pkg_postinst() {
-	ewarn "Be aware that this release contains the best of all of Samba's"
-	ewarn "technology parts, both a file server (that you can reasonably expect"
-	ewarn "to upgrade existing Samba 3.x releases to) and the AD domain"
-	ewarn "controller work previously known as 'samba4'."
+	elog "Be aware that this release contains the best of all of Samba's"
+	elog "technology parts, both a file server (that you can reasonably expect"
+	elog "to upgrade existing Samba 3.x releases to) and the AD domain"
+	elog "controller work previously known as 'samba4'."
 
 	elog "For further information and migration steps make sure to read "
 	elog "https://samba.org/samba/history/${P}.html "

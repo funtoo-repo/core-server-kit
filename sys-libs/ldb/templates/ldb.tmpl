@@ -1,19 +1,22 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
 PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE="threads(+)"
+inherit python-single-r1 waf-utils
 
-inherit python-single-r1 waf-utils eutils
+DESCRIPTION="{{desc}}"
+HOMEPAGE="{{homepage}}"
+SRC_URI="{{src_uri}}"
+LICENSE="{{license}}"
 
-DESCRIPTION="An LDAP-like embedded database"
-HOMEPAGE="https://ldb.samba.org"
-SRC_URI="https://www.samba.org/ftp/pub/${PN}/${P}.tar.gz"
-
-LICENSE="LGPL-3"
 SLOT="0/${PV}"
 KEYWORDS="*"
 IUSE="doc +ldap +lmdb python test"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}
+	test? ( python )"
 
 RESTRICT="!test? ( test )"
 
@@ -21,26 +24,28 @@ RDEPEND="
 	!elibc_FreeBSD? ( dev-libs/libbsd )
 	dev-libs/popt
 	>=dev-util/cmocka-1.1.3
-	>=sys-libs/talloc-2.2.0[python?]
-	>=sys-libs/tdb-1.4.2[python?]
-	>=sys-libs/tevent-0.10.0[python(+)?]
+	>=sys-libs/talloc-2.3.1
+	>=sys-libs/tdb-1.4.3
+	>=sys-libs/tevent-0.10.2
 	ldap? ( net-nds/openldap )
 	lmdb? ( >=dev-db/lmdb-0.9.16 )
-	python? ( ${PYTHON_DEPS} )
+	python? (
+		${PYTHON_DEPS}
+		sys-libs/talloc[python,${PYTHON_USEDEP}]
+		sys-libs/tdb[python,${PYTHON_USEDEP}]
+		sys-libs/tevent[python,${PYTHON_USEDEP}]
+	)
 "
-
-DEPEND="dev-libs/libxslt
-	doc? ( app-doc/doxygen )
+DEPEND="${RDEPEND}"
+BDEPEND="${PYTHON_DEPS}
+	dev-libs/libxslt
 	virtual/pkgconfig
-	${PYTHON_DEPS}
-	${RDEPEND}
+	doc? ( app-doc/doxygen )
 "
-
-REQUIRED_USE="
-	${PYTHON_REQUIRED_USE}
-	test? ( python )"
 
 WAF_BINARY="${S}/buildtools/bin/waf"
+
+MULTILIB_WRAPPED_HEADERS=( /usr/include/pyldb.h )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.5.2-optional_packages.patch
@@ -60,6 +65,7 @@ src_prepare() {
 }
 
 src_configure() {
+    export PYTHONHASHSEED=1
 	local myconf=(
 		$(usex ldap '' --disable-ldap)
 		$(usex lmdb '' --without-ldb-lmdb)
@@ -91,7 +97,7 @@ src_install() {
 	if use doc; then
 		doman  apidocs/man/man3/*.3
 		docinto html
-		dodoc -r apidocs/html/*
+		dodoc -r apidocs/html/.
 	fi
 
 	use python && python_optimize #726454
