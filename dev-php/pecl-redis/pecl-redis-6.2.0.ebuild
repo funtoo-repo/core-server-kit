@@ -17,7 +17,7 @@ LICENSE="PHP-3.01"
 SLOT="0"
 KEYWORDS="*"
 
-SRC_URI="https://github.com/phpredis/phpredis/tarball/5419cc9c60d1ee04163b4d5323dd0fb02fb4f8bb -> phpredis-6.1.0-5419cc9.tar.gz"
+SRC_URI="https://github.com/phpredis/phpredis/tarball/04e54f8833efb9504354f1c167eeea3dddf21217 -> phpredis-6.2.0-04e54f8.tar.gz"
 
 IUSE="igbinary +json lz4 +session zstd"
 
