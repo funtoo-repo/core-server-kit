@@ -8,7 +8,7 @@ inherit distutils-r1
 DESCRIPTION="Python bindings for the AWS Common Runtime"
 HOMEPAGE="https://github.com/awslabs/aws-crt-python"
 SRC_URI="
-	https://github.com/awslabs/aws-crt-python/tarball/fc6ba61707033b514e25d181f5e1a4517f3ce90f -> aws-crt-python-0.25.5-fc6ba61.tar.gz
+	https://github.com/awslabs/aws-crt-python/tarball/cff906825b66a9a92b5a9782875ab2d9df5f3ea6 -> aws-crt-python-0.25.6-cff9068.tar.gz
 	https://github.com/awslabs/aws-c-auth/tarball/cd9d6afcd42035d49bb2d0d3bef24b9faed57773 -> aws-c-auth-0.9.0-cd9d6af.tar.gz
 	https://github.com/awslabs/aws-c-cal/tarball/ff8801488d588067d021d131193681b591699477 -> aws-c-cal-0.8.9-ff88014.tar.gz
 	https://github.com/awslabs/aws-c-common/tarball/8ae8f48ebddb0ee2624d643952ac33afa5e8859e -> aws-c-common-0.12.2-8ae8f48.tar.gz
@@ -17,7 +17,7 @@ SRC_URI="
 	https://github.com/awslabs/aws-c-http/tarball/e526ac338ca414c01d3fc037da1c418c935808bc -> aws-c-http-0.9.6-e526ac3.tar.gz
 	https://github.com/awslabs/aws-c-io/tarball/6c90e4911ae1985c72efb4f22bfe4d173b26107b -> aws-c-io-0.18.0-6c90e49.tar.gz
 	https://github.com/awslabs/aws-c-mqtt/tarball/fb651a4a59f28384fdb4938524192433492dead0 -> aws-c-mqtt-0.12.3-fb651a4.tar.gz
-	https://github.com/awslabs/aws-c-s3/tarball/408e9c90367b27e0a965f22b4661eb9f81f21d3b -> aws-c-s3-0.7.14-408e9c9.tar.gz
+	https://github.com/awslabs/aws-c-s3/tarball/0770d353ce2d04af0f2b1ee3680a8f827f28263f -> aws-c-s3-0.7.15-0770d35.tar.gz
 	https://github.com/awslabs/aws-c-sdkutils/tarball/ba6a28fab7ed5d7f1b3b1d12eb672088be093824 -> aws-c-sdkutils-0.2.3-ba6a28f.tar.gz
 	https://github.com/awslabs/aws-checksums/tarball/66b447c0765a2caff2d806111e6ec1db2383e4d2 -> aws-checksums-0.2.5-66b447c.tar.gz
 	https://github.com/awslabs/aws-lc/tarball/b1420f27a7c95762cd11b249ece3d049f530d9e6 -> aws-lc-1.49.1-b1420f2.tar.gz
