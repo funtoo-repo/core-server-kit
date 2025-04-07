@@ -296,17 +296,15 @@ mod_doc["njs"]="README"
 
 inherit autotools eutils ssl-cert toolchain-funcs perl-module flag-o-matic user versionator pax-utils
 
-DESCRIPTION="Robust, small and high performance http and reverse proxy server"
-HOMEPAGE="http://nginx.org"
-SRC_URI="https://github.com/nginx/nginx/archive/release-${PV}.tar.gz"
-#SRC_URI="http://nginx.org/download/${P}.tar.gz"
+DESCRIPTION=""
+HOMEPAGE="{ {homepage }}"
+SRC_URI="https://github.com/nginx/nginx/tarball/4d2b955c8e25b4dd2fc477ebc05bcd392e9bd2df -> nginx-1.26.3-4d2b955.tar.gz"
+LICENSE=BSD-2
 
 for m in ${!mod_a[@]} ; do
 	SRC_URI+=" nginx_modules_external_${m}? (
 		${mod_uri[$m]} -> ${mod_p[$m]}.tar.gz )"
 done
-
-LICENSE="BSD-2"
 
 for m in ${!mod_a[@]} ; do
 	LICENSE+=" nginx_modules_external_${m}? ( ${mod_lic[$m]} )"
@@ -317,6 +315,8 @@ KEYWORDS="*"
 
 # Package doesn't provide a real test suite
 RESTRICT="test"
+
+S="${WORKDIR}/nginx-nginx-4d2b955"
 
 mods[standard]="access auth_basic autoindex browser charset empty_gif fastcgi
 	geo  grpc gzip limit_conn limit_req map memcached mirror
@@ -911,6 +911,5 @@ pkg_postinst() {
 		chmod g+rx ${EROOT}var/log/${PN}
 	fi
 }
-
 
 
