@@ -9,7 +9,7 @@ HOMEPAGE="https://sqlite.org/"
 
 # On version updates, make sure to read the forum (https://sqlite.org/forum/forum)
 # for hints regarding test failures, backports, etc.
-SRC_URI="https://github.com/sqlite/sqlite/tarball/1b571af11a0348773889f45b66d319577026b775 -> sqlite-3.49.2-1b571af.tar.gz"
+SRC_URI="https://github.com/sqlite/sqlite/tarball/3f523613528194d3487853ed6e5367c6f215ec4f -> sqlite-3.50.0-3f52361.tar.gz"
 
 LICENSE="public-domain"
 SLOT="3"
@@ -27,7 +27,7 @@ RDEPEND="sys-libs/zlib:0=
 DEPEND="${RDEPEND}
 	test? ( >=dev-lang/tcl-8.6:0 )"
 
-S="${WORKDIR}/sqlite-sqlite-1b571af"
+S="${WORKDIR}/sqlite-sqlite-3f52361"
 
 src_configure() {
 	local -x CPPFLAGS="${CPPFLAGS}" CFLAGS="${CFLAGS}"
