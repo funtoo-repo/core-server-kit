@@ -8,7 +8,7 @@ inherit python-single-r1 waf-utils linux-info pam
 
 DESCRIPTION="Samba Suite"
 HOMEPAGE="https://samba.org/"
-SRC_URI="https://download.samba.org/pub/samba/stable/samba-4.22.1.tar.gz -> samba-4.22.1.tar.gz
+SRC_URI="https://download.samba.org/pub/samba/stable/samba-4.22.2.tar.gz -> samba-4.22.2.tar.gz
 "
 LICENSE="LGPL-3"
 
