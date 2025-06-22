@@ -11,6 +11,6 @@ RDEPEND=!elibc_FreeBSD? ( dev-libs/libbsd ) >=sys-libs/talloc-2.3.1 python? ( py
 REQUIRED_USE=^^ ( python_single_target_python3_10 python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 )
 RESTRICT=test
 SLOT=0
-SRC_URI=https://www.samba.org/ftp/tevent/tevent-0.16.2.tar.gz -> tevent-0.16.2.tar.gz
+SRC_URI=https://www.samba.org/ftp/tevent/tevent-0.17.0.tar.gz -> tevent-0.17.0.tar.gz
 _eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	d3f9ec72badd0291b655682d67876adc	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	waf-utils	0a6e492cdcbd52b1304cfcd9eba5abc6
-_md5_=e02110a64d554dd78acfaaaea7c1bbcf
+_md5_=578b360db5d14c6fa2a8fdbf71659284

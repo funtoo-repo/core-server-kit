@@ -8,7 +8,7 @@ inherit waf-utils python-single-r1
 
 DESCRIPTION="Samba tevent library"
 HOMEPAGE="https://tevent.samba.org"
-SRC_URI="https://www.samba.org/ftp/tevent/tevent-0.16.2.tar.gz -> tevent-0.16.2.tar.gz
+SRC_URI="https://www.samba.org/ftp/tevent/tevent-0.17.0.tar.gz -> tevent-0.17.0.tar.gz
 "
 LICENSE="LGPL-3"
 
