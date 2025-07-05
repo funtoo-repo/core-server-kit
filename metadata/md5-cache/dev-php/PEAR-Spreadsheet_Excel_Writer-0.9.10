@@ -6,6 +6,6 @@ KEYWORDS=*
 LICENSE=LGPL-2.1
 RDEPEND=>=dev-lang/php-5.4:*[iconv] >=dev-php/PEAR-OLE-0.5-r1 >=dev-php/pear-1.8.1
 SLOT=0
-SRC_URI=https://github.com/pear/Spreadsheet_Excel_Writer/tarball/da9cec7557c3d96e2ad374792f47e806b222d6b5 -> Spreadsheet_Excel_Writer-0.9.9-da9cec7.tar.gz
+SRC_URI=https://github.com/pear/Spreadsheet_Excel_Writer/tarball/a39ee10a74bb411b6929a234347bceb07bd8d052 -> Spreadsheet_Excel_Writer-0.9.10-a39ee10.tar.gz
 _eclasses_=php-pear-r2	479e8a084e98f4d730da647bba3e589e
-_md5_=48d4108ab4f8278840afde3ad4d52971
+_md5_=d1f47814317f40877e95d2df1e4d894d

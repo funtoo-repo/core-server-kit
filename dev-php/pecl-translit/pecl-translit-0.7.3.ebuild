@@ -12,7 +12,7 @@ PHP_EXT_NAME="translit"
 
 inherit php-ext-source-r3
 
-SRC_URI="https://github.com/derickr/pecl-translit/tarball/3e18190e94f1b231ef0c4027673484e4191a49bf -> pecl-translit-0.7.1-3e18190.tar.gz"
+SRC_URI="https://github.com/derickr/pecl-translit/tarball/44caa6bb8bcd3d43983551020a82e49042c677b1 -> pecl-translit-0.7.3-44caa6b.tar.gz"
 KEYWORDS="*"
 HOMEPAGE="https://github.com/derickr/pecl-translit"
 
