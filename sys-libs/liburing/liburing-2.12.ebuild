@@ -6,7 +6,7 @@ inherit multilib-minimal toolchain-funcs
 
 DESCRIPTION="Efficient I/O with io_uring"
 HOMEPAGE="https://github.com/axboe/liburing"
-SRC_URI="https://github.com/axboe/liburing/tarball/6ea39fc95a341c10e843702cf2cdcab72c7797a4 -> liburing-2.11-6ea39fc.tar.gz"
+SRC_URI="https://github.com/axboe/liburing/tarball/82387ffda15d34ee01653532062ef8fce02a470a -> liburing-2.12-82387ff.tar.gz"
 KEYWORDS="*"
 QA_PKGCONFIG_VERSION=${PV}
 LICENSE="MIT"
