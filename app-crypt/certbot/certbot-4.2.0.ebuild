@@ -6,7 +6,7 @@ PYTHON_COMPAT=( python3+ )
 inherit distutils-r1
 
 DESCRIPTION="ACME client"
-HOMEPAGE="https://github.com/certbot/certbot https://pypi.org/project/certbot/"
+HOMEPAGE="None https://pypi.org/project/certbot/"
 SRC_URI="https://files.pythonhosted.org/packages/f2/e3/199262bf00c9bd5dfccfe0a64c26c2fb132b92511bee416c3408a54b4cf1/certbot-4.2.0.tar.gz -> certbot-4.2.0.tar.gz"
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"

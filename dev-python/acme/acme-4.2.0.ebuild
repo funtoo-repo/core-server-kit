@@ -6,7 +6,7 @@ PYTHON_COMPAT=( python3+ )
 inherit distutils-r1
 
 DESCRIPTION="ACME protocol implementation in Python"
-HOMEPAGE="https://github.com/certbot/certbot https://pypi.org/project/acme/"
+HOMEPAGE="None https://pypi.org/project/acme/"
 SRC_URI="https://files.pythonhosted.org/packages/48/df/d006c4920fd04b843c21698bd038968cb9caa3315608f55abde0f8e4ad6b/acme-4.2.0.tar.gz -> acme-4.2.0.tar.gz"
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
