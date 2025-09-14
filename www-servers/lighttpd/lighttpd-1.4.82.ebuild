@@ -8,7 +8,7 @@ inherit autotools flag-o-matic readme.gentoo-r1 user
 
 DESCRIPTION="Lightweight high-performance web server"
 HOMEPAGE="https://www.lighttpd.net https://github.com/lighttpd/lighttpd1.4"
-SRC_URI="https://github.com/lighttpd/lighttpd1.4/tarball/89ecb4e81aabbba65f0ce890a8e31206358e6f53 -> lighttpd1.4-1.4.81-89ecb4e.tar.gz"
+SRC_URI="https://github.com/lighttpd/lighttpd1.4/tarball/95a86758ed084efd2654418f1fca780c4fc6f300 -> lighttpd1.4-1.4.82-95a8675.tar.gz"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
