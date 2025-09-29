@@ -29,13 +29,18 @@ async def get_minimum_node_version(artifact):
 	# extract the contents of package.json in the src tarball
 	await artifact.fetch()
 	artifact.extract()
-	try: # versions 6, 7
-		package = os.path.join(artifact.extract_path, artifact.final_name.split(".tar.")[0], "package.json")
-		package_info = json.load(open(package))
-	except FileNotFoundError: # version 8
-		package = os.path.join(artifact.extract_path, artifact.final_name.split("-linux")[0], "package.json")
-		package_info = json.load(open(package))
-	artifact.cleanup()
+	try:
+		# Be robust across Kibana versions by locating package.json via glob.
+		# Expected structure: <extract_path>/<dir>/package.json
+		import glob
+		candidates = glob.glob(os.path.join(artifact.extract_path, "*", "package.json"))
+		if not candidates:
+			raise FileNotFoundError("package.json not found in extracted Kibana artifact")
+		package = candidates[0]
+		with open(package) as f:
+			package_info = json.load(f)
+	finally:
+		artifact.cleanup()
 	version = Version(package_info["engines"]["node"])
 	return { 'minimum': version.public, 'series': max(version.major, MINIMUM_STABLE_NODEJS) }
 
@@ -67,23 +72,65 @@ async def generate(hub, **pkginfo):
 		# which contains Javascript (JSON). We can parse this, and extract the necessary information.
 
 		soup = BeautifulSoup(html, "lxml")
-		json_data = json.loads(str(soup.find('script', id="__NEXT_DATA__" ).text))
-		if "entry" not in json_data["props"]["pageProps"]:
-			continue
-		package_data = json_data["props"]["pageProps"]["entry"][0][0]["package"]
-		for package in package_data:
-			if not package["title"].startswith("Linux"):
-				continue
-			if not package["url"].endswith(".tar.gz"):
-				continue
-			tarballs.append(package["url"])
+		tarballs = []
+		script_tag = soup.find('script', id="__NEXT_DATA__")
+
+		# First, try the JSON payload approach if available:
+		if script_tag is not None and script_tag.text:
+			try:
+				json_data = json.loads(str(script_tag.text))
+				if "entry" in json_data.get("props", {}).get("pageProps", {}):
+					package_data = json_data["props"]["pageProps"]["entry"][0][0]["package"]
+					for package in package_data:
+						# Keep only Linux tarballs
+						if not package["title"].startswith("Linux"):
+							continue
+						if not package["url"].endswith(".tar.gz"):
+							continue
+						tarballs.append(package["url"])
+			except (json.JSONDecodeError, KeyError, TypeError):
+				# Fall back to link scraping if JSON format has changed
+				pass
+
+		# Fallback: scrape links to .tar.gz directly from the page when JSON is missing or unusable.
+		# Restrict to Linux archives only.
 		if not tarballs:
-			raise hub.pkgtools.ebuild.BreezyError(f"No tarballs found for {pkginfo['name']} when looking at {download_page} __NEXT_DATA__ <script> tag.") 
+			for a in soup.find_all('a', href=True):
+				href = a['href']
+				if not href.endswith(".tar.gz"):
+					continue
+				# Normalize to absolute URL
+				if href.startswith("/"):
+					full = f"https://www.elastic.co{href}"
+				elif href.startswith("http://") or href.startswith("https://"):
+					full = href
+				else:
+					continue
+				# Filter to Linux tarballs only
+				# Accept patterns containing "-linux-" in the filename or URL path.
+				if "-linux-" not in full:
+					continue
+				tarballs.append(full)
+
+		if not tarballs:
+			raise hub.pkgtools.ebuild.BreezyError(
+				f"No tarballs found for {pkginfo['name']} when looking at {download_page}. "
+				f"Checked both __NEXT_DATA__ JSON and direct link scraping."
+			)
+
 		artifacts = await generate_artifacts(hub, pkginfo, tarballs)
 
 		# find the compatible node version for kibana-bin
 		if 'nodejs' in pkginfo:
-			pkginfo['nodejs'] = await get_minimum_node_version(artifacts[0][1])
+			# Prefer a Linux amd64 artifact for determining Node.js version; fall back to any available.
+			linux_preferred = None
+			for arch, art in artifacts:
+				if arch in ('amd64', 'arm64'):
+					linux_preferred = art
+					break
+			if linux_preferred is None:
+				linux_preferred = artifacts[0][1]
+			pkginfo['nodejs'] = await get_minimum_node_version(linux_preferred)
 
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
