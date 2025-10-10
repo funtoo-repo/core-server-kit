@@ -29,3 +29,8 @@ SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
 S="${WORKDIR}/certbot-5.1.0"
+
+src_prepare() {
+	sed -i -e 's/license = "Apache-2.0"/license = { text = "Apache-2.0" }/' pyproject.toml || die
+	distutils-r1_python_prepare_all
+}
