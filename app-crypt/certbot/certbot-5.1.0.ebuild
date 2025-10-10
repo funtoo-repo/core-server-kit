@@ -3,11 +3,12 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517="setuptools"
 inherit distutils-r1
 
 DESCRIPTION="ACME client"
 HOMEPAGE="None https://pypi.org/project/certbot/"
-SRC_URI="https://files.pythonhosted.org/packages/f2/e3/199262bf00c9bd5dfccfe0a64c26c2fb132b92511bee416c3408a54b4cf1/certbot-4.2.0.tar.gz -> certbot-4.2.0.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/3d/d7/358779f99a2336010a27e12c9fc99b14602b9a5410f890390fa3be08e598/certbot-5.1.0.tar.gz -> certbot-5.1.0.tar.gz"
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="
@@ -27,4 +28,4 @@ IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
-S="${WORKDIR}/certbot-4.2.0"
+S="${WORKDIR}/certbot-5.1.0"

@@ -14,7 +14,7 @@ inherit php-ext-pecl-r3
 
 KEYWORDS="*"
 
-SRC_URI="https://github.com/m6w6/ext-http/tarball/99e4f247a83b30bfc0b6c93943cb4ad373efc136 -> ext-http-4.2.6-99e4f24.tar.gz"
+SRC_URI="https://github.com/m6w6/ext-http/tarball/705491493e8292a51687824e6ede98c9b7a20ba9 -> ext-http-4.3.1-7054914.tar.gz"
 
 DESCRIPTION="Extended HTTP Support for PHP"
 LICENSE="BSD-2 MIT"
