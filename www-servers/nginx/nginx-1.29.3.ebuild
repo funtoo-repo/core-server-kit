@@ -298,7 +298,7 @@ inherit autotools eutils ssl-cert toolchain-funcs perl-module flag-o-matic user 
 
 DESCRIPTION=""
 HOMEPAGE="{ {homepage }}"
-SRC_URI="https://github.com/nginx/nginx/tarball/8277a4b4f2bab6973ad917f532e3bcbd364ef10f -> nginx-1.29.2-8277a4b.tar.gz"
+SRC_URI="https://github.com/nginx/nginx/tarball/c9816b10ca183af06885679271200820da9beb77 -> nginx-1.29.3-c9816b1.tar.gz"
 LICENSE=BSD-2
 
 for m in ${!mod_a[@]} ; do
@@ -316,7 +316,7 @@ KEYWORDS="*"
 # Package doesn't provide a real test suite
 RESTRICT="test"
 
-S="${WORKDIR}/nginx-nginx-8277a4b"
+S="${WORKDIR}/nginx-nginx-c9816b1"
 
 mods[standard]="access auth_basic autoindex browser charset empty_gif fastcgi
 	geo  grpc gzip limit_conn limit_req map memcached mirror

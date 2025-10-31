@@ -9,10 +9,10 @@ MY_P=${MY_PN}-${PV}
 DESCRIPTION="The Prometheus monitoring system and time series database."
 HOMEPAGE="https://github.com/prometheus/prometheus"
 SRC_URI="amd64? (
-  https://github.com/prometheus/prometheus/releases/download/v3.7.2/prometheus-3.7.2.linux-amd64.tar.gz -> prometheus-3.7.2.linux-amd64.tar.gz
+  https://github.com/prometheus/prometheus/releases/download/v3.7.3/prometheus-3.7.3.linux-amd64.tar.gz -> prometheus-3.7.3.linux-amd64.tar.gz
 )
 arm64? (
-  https://github.com/prometheus/prometheus/releases/download/v3.7.2/prometheus-3.7.2.linux-arm64.tar.gz -> prometheus-3.7.2.linux-arm64.tar.gz
+  https://github.com/prometheus/prometheus/releases/download/v3.7.3/prometheus-3.7.3.linux-arm64.tar.gz -> prometheus-3.7.3.linux-arm64.tar.gz
 )
 "
 
