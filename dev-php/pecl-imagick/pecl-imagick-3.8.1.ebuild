@@ -10,7 +10,7 @@ inherit php-ext-pecl-r3
 
 KEYWORDS="*"
 
-SRC_URI="https://github.com/Imagick/imagick/tarball/555bf68b592a8d9d0a0a2f37d1256a8b6cf2d39e -> imagick-3.8.0-555bf68.tar.gz"
+SRC_URI="https://github.com/Imagick/imagick/tarball/70087bab33eab913e99ac77d64d04d1a2fd0b7b0 -> imagick-3.8.1-70087ba.tar.gz"
 
 DESCRIPTION="PHP wrapper for the ImageMagick library"
 HOMEPAGE="https://pecl.php.net/package/imagick https://github.com/Imagick/imagick"
